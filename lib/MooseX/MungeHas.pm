@@ -225,6 +225,8 @@ __END__
 
 =encoding utf-8
 
+=for stopwords metathingies munges mungers
+
 =head1 NAME
 
 MooseX::MungeHas - munge your "has" (works with Moo, Moose and Mouse)
