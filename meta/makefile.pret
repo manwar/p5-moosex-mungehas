@@ -1,0 +1,8 @@
+# This file provides instructions for packaging.
+
+`MooseX-MungeHas`
+	perl_version_from m`MooseX::MungeHas`;
+	version_from      m`MooseX::MungeHas`;
+	readme_from       m`MooseX::MungeHas` ;
+	.
+
