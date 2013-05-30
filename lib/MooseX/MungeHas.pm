@@ -276,10 +276,10 @@ L<Mouse>.
 =item C<< always_coerce >>
 
 Automatically provides C<< coerce => 1 >> if the type constraint provides
-coercions.
+coercions. (Unless you've explicitly specified C<< coerce => 0 >>.)
 
 Although L<Moo> expects coerce to be a coderef, MooseX::MungeHas supplies
-an implementation of C<< coerce => 1 >> for L<Type::Tiny> type constraints.
+an implementation of C<< coerce => 0|1 >> for L<Type::Tiny> type constraints.
 
 =item C<< eq_1 >>
 
