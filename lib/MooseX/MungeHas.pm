@@ -48,7 +48,6 @@ sub _make_munger
 	my ($caller, @features) = @_;
 	
 	@features or croak "Munge 'has' how exactly?? Expected list";
-	return $features[0] if @features == 1 && ref($features[0]);
 	
 	return $class->_compile_munger_code($caller, @features);
 }
