@@ -110,6 +110,15 @@ sub _compile_munger_code
 		push @code, '  }';
 	}
 	
+	if (_detect_oo($caller) eq "Moo")
+	{
+		push @code, '  if (defined($_->{coerce}) and $_->{coerce} eq "1") {';
+		push @code, '    Scalar::Util::blessed($_->{isa}) && $_->{isa}->isa("Type::Tiny")';
+		push @code, '      or Carp::croak("coerce => 1, but not isa => Type::Tiny");';
+		push @code, '    $_->{coerce} = $_->{isa}->coercion;';
+		push @code, '  }';
+	}
+	
 	if (delete $features{"no_isa"})
 	{
 		push @code, '  delete($_->{isa}) if !exists($_->{coerce});';
@@ -266,6 +275,9 @@ L<Mouse>.
 
 Automatically provides C<< coerce => 1 >> if the type constraint provides
 coercions.
+
+Although L<Moo> expects coerce to be a coderef, MooseX::MungeHas supplies
+an implementation of C<< coerce => 1 >> for L<Type::Tiny> type constraints.
 
 =item C<< eq_1 >>
 
