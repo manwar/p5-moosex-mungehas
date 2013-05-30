@@ -7,5 +7,7 @@
 	requires          p`Eval::TypeTiny 0.006`;
 	test_requires     p`Test::More 0.96`;
 	test_requires     p`Test::Requires 0.06`;
+	test_requires     p`Test::Fatal`;
+	test_requires     p`Types::Standard 0.006`;
 	.
 
