@@ -9,5 +9,7 @@
 	test_requires     p`Test::Requires 0.06`;
 	test_requires     p`Test::Fatal`;
 	test_requires     p`Types::Standard 0.006`;
+	recommends        p`Moose 2.0000`;
+	recommends        p`Moo 1.002000`;
 	.
 
