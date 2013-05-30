@@ -116,6 +116,9 @@ sub _compile_munger_code
 		push @code, '      or Carp::croak("coerce => 1, but not isa => Type::Tiny");';
 		push @code, '    $_->{coerce} = $_->{isa}->coercion;';
 		push @code, '  }';
+		push @code, '  elsif (exists($_->{coerce}) and not $_->{coerce}) {';
+		push @code, '    delete($_->{coerce});';
+		push @code, '  }';
 	}
 	
 	if (delete $features{"no_isa"})
