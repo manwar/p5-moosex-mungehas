@@ -222,7 +222,7 @@ sub _make_has_mouse
 			local $_ = \%spec;
 			local $. = $attr;
 			$coderef->($attr, %spec);
-			local @_ = ($attr, %$_);
+			@_ = ($attr, %$_);
 			goto $orig;
 		}
 	};
