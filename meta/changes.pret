@@ -38,3 +38,12 @@
 		];
 	].
 
+`MooseX-MungeHas 0.002 cpan:TOBYINK`
+	issued  2013-08-20;
+	changeset [
+		item [
+			a dcs:Bugfix;
+			label "Fix syntax error compiling the eq_1 munger.";
+		];
+	].
+
