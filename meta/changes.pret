@@ -47,3 +47,16 @@
 		];
 	].
 
+`MooseX-MungeHas 0.003 cpan:TOBYINK`
+	issued  2013-08-28;
+	changeset [
+		item [
+			a dcs:Change;
+			label "Use the `%_` hash for the attribute spec instead of `%$_`.";
+		];
+		item [
+			a dcs:Change;
+			label "Use the `$_` variable for the attribute name instead of `$.`.";
+		];
+	].
+
