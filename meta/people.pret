@@ -10,3 +10,6 @@ cpan:TOBYINK
 	a      :Person;
 	:name  "Luc J. Bourhis";
 	:page  <https://github.com/luc-j-bourhis>.
+
+cpan:ARODLAND
+	:name  "Andrew Rodland".

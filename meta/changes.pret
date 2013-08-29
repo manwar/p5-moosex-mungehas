@@ -60,3 +60,13 @@
 		];
 	].
 
+`MooseX-MungeHas 0.004 cpan:TOBYINK`
+	issued  2013-08-29;
+	changeset [
+		item [
+			a dcs:Bugfix;
+			label "Fix a stray `$.` that wasn't changed in 0.003.";
+			dcs:blame cpan:ARODLAND;
+		];
+	].
+
