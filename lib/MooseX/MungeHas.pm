@@ -55,11 +55,7 @@ sub _detect_oo
 sub _make_munger
 {
 	my $class = shift;
-	my ($caller, @features) = @_;
-	
-	@features or croak "Munge 'has' how exactly?? Expected list";
-	
-	return $class->_compile_munger_code($caller, @features);
+	return $class->_compile_munger_code(@_);
 }
 
 sub _compile_munger_code
@@ -100,17 +96,15 @@ sub _compile_munger_code
 		push @code, '  }';
 	}
 	
-	if (delete $features{"eq_1"})
-	{
-		push @code, '  my ($pfx, $name) = ($_ =~ /^(_*)(.+)$/);';
-		push @code, '  $_{builder}   = "_build_$_" if exists($_{builder}) && $_{builder} eq q(1);';
-		push @code, '  $_{clearer}   = "${pfx}clear_${name}" if exists($_{clearer}) && $_{clearer} eq q(1);';
-		push @code, '  $_{predicate} = "${pfx}has_${name}" if exists($_{predicate}) && $_{predicate} eq q(1);';
-		push @code, '  if (exists($_{trigger}) && $_{trigger} eq q(1)) {';
-		push @code, '    my $method = "_trigger_$_";';
-		push @code, '    $_{trigger} = sub { shift->$method(@_) };';
-		push @code, '  }';
-	}
+	delete $features{"eq_1"};
+	push @code, '  my ($pfx, $name) = ($_ =~ /^(_*)(.+)$/);';
+	push @code, '  $_{builder}   = "_build_$_" if exists($_{builder}) && $_{builder} eq q(1);';
+	push @code, '  $_{clearer}   = "${pfx}clear_${name}" if exists($_{clearer}) && $_{clearer} eq q(1);';
+	push @code, '  $_{predicate} = "${pfx}has_${name}" if exists($_{predicate}) && $_{predicate} eq q(1);';
+	push @code, '  if (exists($_{trigger}) && $_{trigger} eq q(1)) {';
+	push @code, '    my $method = "_trigger_$_";';
+	push @code, '    $_{trigger} = sub { shift->$method(@_) };';
+	push @code, '  }';
 	
 	if (delete $features{"always_coerce"})
 	{
@@ -270,8 +264,29 @@ it doesn't attempt to do anything smart with metathingies; it simply
 installs a wrapper for C<< has >> that munges the attribute specification
 hash before passing it on to the original C<< has >> function.
 
-When you C<< use MooseX::MungeHas >> you must provide a list of mungers
-you want it to apply. The following are currently pre-defined:
+The following munges are always applied:
+
+=over
+
+=item *
+
+Implement C<< is => "rwp" >> and C<< is => "lazy" >> in L<Moose> and
+L<Mouse>.
+
+=item *
+
+Implement C<< builder => 1 >>, C<< clearer => 1 >>, C<< predicate => 1 >>,
+and C<< trigger => 1 >> in L<Moose> and L<Mouse>.
+
+=item *
+
+Allow L<Moo> to support C<< coerce => 0|1 >> for L<Type::Tiny> type
+constraints. (Moo normally expects a coderef for the coercion.)
+
+=back
+
+When you C<< use MooseX::MungeHas >> you can provide a list of additional
+mungers you want it to apply. The following are pre-defined shortcuts:
 
 =over
 
@@ -279,22 +294,10 @@ you want it to apply. The following are currently pre-defined:
 
 These mungers supply defaults for the C<< is >> option.
 
-Although only L<Moo> supports C<< is => "rwp" >> and C<< is => "lazy" >>,
-MooseX::MungeHas supplies an implementation of both for L<Moose> or
-L<Mouse>.
-
 =item C<< always_coerce >>
 
 Automatically provides C<< coerce => 1 >> if the type constraint provides
 coercions. (Unless you've explicitly specified C<< coerce => 0 >>.)
-
-Although L<Moo> expects coerce to be a coderef, MooseX::MungeHas supplies
-an implementation of C<< coerce => 0|1 >> for L<Type::Tiny> type constraints.
-
-=item C<< eq_1 >>
-
-Makes C<< builder => 1 >>, C<< clearer => 1 >>, C<< predicate => 1 >>,
-and C<< trigger => 1 >> do what you mean.
 
 =item C<< no_isa >>
 
