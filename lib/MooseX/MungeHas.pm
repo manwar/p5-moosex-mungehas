@@ -286,8 +286,26 @@ constraints. (Moo normally expects a coderef for the coercion.)
 
 =back
 
-When you C<< use MooseX::MungeHas >> you can provide a list of additional
-mungers you want it to apply. The following are pre-defined shortcuts:
+When you import this module (i.e. C<< use MooseX::MungeHas >>) you can
+provide a list of additional mungers you want it to apply. These may be
+provided as coderefs, though for a few common, useful sets of behaviour,
+there are pre-defined shortcut strings.
+
+   # "no_isa" is a pre-defined shortcut;
+   # the other munger is a coderef.
+   #
+   use MooseX::MungeHas "no_isa", sub {
+      # Make constructor ignore private attributes
+      $_{init_arg} = undef if /^_/;
+   };
+
+Within coderefs, the name of the attribute being processed is available
+in the C<< $_ >> variable, and the specification hash is available as
+C<< %_ >>.
+
+You may provide multiple coderefs.
+
+The following are the pre-defined shortcuts:
 
 =over
 
@@ -314,21 +332,8 @@ Only works if you're using L<Type::Tiny> constraints.
 
 =back
 
-If these predefined mungers don't float your boat, then you can provide
-additional mungers using coderefs:
-
-   use MooseX::MungeHas "no_isa", sub {
-      # Make constructor ignore private attributes
-      $_{init_arg} = undef if /^_/;
-   };
-
-Within coderefs, the name of the attribute being processed is available
-in the C<< $_ >> variable, and the specification hash is available as
-C<< %_ >>.
-
-You may provide multiple coderefs. Mungers provided as coderefs are
-executed I<after> named ones, but are otherwise executed in the order
-specified.
+Mungers provided as coderefs are executed I<after> predefined ones, but
+are otherwise executed in the order specified.
 
 =head1 BUGS
 
