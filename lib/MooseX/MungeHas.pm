@@ -264,7 +264,8 @@ it doesn't attempt to do anything smart with metathingies; it simply
 installs a wrapper for C<< has >> that munges the attribute specification
 hash before passing it on to the original C<< has >> function.
 
-The following munges are always applied:
+The following munges are always applied (simply because I can see no
+sensible reason why you would not want them to be).
 
 =over
 
