@@ -3,7 +3,6 @@
 @prefix : <http://ontologi.es/doap-deps#> .
 
 `MooseX-MungeHas`
-	:runtime-requirement    [ :on "Eval::TypeTiny 0.006"^^:CpanId ];
 	:runtime-suggestion     [ :on "Moo 1.002000"^^:CpanId ];
 	:runtime-suggestion     [ :on "Moose 2.0000"^^:CpanId ];
 	:runtime-suggestion     [ :on "Mouse 1.00"^^:CpanId ];
@@ -11,7 +10,7 @@
 	:test-requirement       [ :on "Test::More 0.96"^^:CpanId ];
 	:test-requirement       [ :on "Test::Requires 0.06"^^:CpanId ];
 	:test-requirement       [ :on "Test::Fatal"^^:CpanId ];
-	:test-requirement       [ :on "Types::Standard 0.006"^^:CpanId ];
+	:test-recommendation    [ :on "Types::Standard 0.006"^^:CpanId ];
 	:test-recommendation    [ :on "Moose 2.0000"^^:CpanId ];
 	:test-recommendation    [ :on "Moo 1.002000"^^:CpanId ];
 	:test-suggestion        [ :on "Mouse 1.00"^^:CpanId ];

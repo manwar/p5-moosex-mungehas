@@ -7,11 +7,21 @@ use warnings;
 BEGIN {
 	$MooseX::MungeHas::AUTHORITY = 'cpan:TOBYINK';
 	$MooseX::MungeHas::VERSION   = '0.004';
-}
+};
 
 use Carp qw(croak);
-use Eval::TypeTiny qw(eval_closure);
 use Scalar::Util qw();
+
+BEGIN {
+	for my $backend (qw/ Eval::TypeTiny Eval::Closure /)
+	{
+		last if eval(
+			"require $backend; *eval_closure = \\&$backend\::eval_closure;"
+		);
+	}
+	exists(&eval_closure)
+		or croak "Could not load Eval::TypeTiny";
+};
 
 sub import
 {
