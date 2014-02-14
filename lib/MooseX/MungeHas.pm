@@ -70,7 +70,7 @@ sub _compile_munger_code
 	if (_detect_oo($caller) =~ /^Mo[ou]se$/)
 	{
 		push @code, '  if (exists($_{isa}) && !ref($_{isa})) {';
-		push @code, '    $_{isa} = '._detect_oo($caller).'::Util::TypeConstraints::find_or_parse_type_constraint($_{isa});';
+		push @code, '    $_{isa} = '._detect_oo($caller).'::Util::TypeConstraints::find_or_create_isa_type_constraint($_{isa});';
 		push @code, '  }';
 	}
 	
@@ -93,6 +93,13 @@ sub _compile_munger_code
 		push @code, '  if ($_{is} eq q(rwp)) {';
 		push @code, '    $_{is}     = "ro";';
 		push @code, '    $_{writer} = "_set_$_" unless exists($_{writer});';
+		push @code, '  }';
+		
+		push @code, '  if (ref($_{isa}) eq q(CODE)) {';
+		push @code, '    require Type::Tiny;';
+		push @code, '    my $code = $_{isa};';
+		push @code, '    my $safe = sub { !!eval { $code->($_); 1 } };';
+		push @code, '    $_{isa}  = "Type::Tiny"->new(constraint => $safe);';
 		push @code, '  }';
 	}
 	
