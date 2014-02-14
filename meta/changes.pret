@@ -70,3 +70,16 @@
 		];
 	].
 
+`MooseX-MungeHas 0.005 cpan:TOBYINK`
+	issued  2014-02-14;
+	label   "tobyink ♥ isa";
+	changeset [
+		item [
+			a dcs:Bugfix;
+			label "s/find_or_parse_type_constraint/find_or_create_isa_type_constraint/";
+			dcs:thanks <urn:uuid:382de9f9-3ec0-4aa1-ba60-aa80709e75ac>;
+			dcs:fixes RT#92557;
+		];
+		item "Allow Moo-style isa=>sub{...} in Moose and Mouse.";
+	].
+
