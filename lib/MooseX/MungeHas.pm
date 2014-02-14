@@ -249,6 +249,12 @@ __END__
 
 =for stopwords metathingies munges mungers
 
+=begin private
+
+=item eval_closure
+
+=end private
+
 =head1 NAME
 
 MooseX::MungeHas - munge your "has" (works with Moo, Moose and Mouse)

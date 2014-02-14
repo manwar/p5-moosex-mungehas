@@ -80,6 +80,17 @@
 			dcs:thanks <urn:uuid:382de9f9-3ec0-4aa1-ba60-aa80709e75ac>;
 			dcs:fixes RT#92557;
 		];
-		item "Allow Moo-style isa=>sub{...} in Moose and Mouse.";
+		item "Allow Moo-style isa=>sub{...} in Moose and Mouse."^^Change;
+		item "Remove the absolute dependency on Eval::TypeTiny; allow Eval::Closure to be used in its stead."^^Change;
+		item [
+			a dcs:Packaging;
+			label "No longer depend on Eval::TypeTiny.";
+		];
+		item [
+			a dcs:Tests, dcs:Packaging;
+			label "No longer depend on Types::Standard for tests; skip those tests if it's not installed.";
+		];
+		item "Always enable the eq_1 feature; it's never useful for it to be disabled."^^Change;
+		item "Various documentation improvements."^^Documentation;
 	].
 
