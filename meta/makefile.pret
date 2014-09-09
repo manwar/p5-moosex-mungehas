@@ -3,6 +3,8 @@
 @prefix : <http://ontologi.es/doap-deps#> .
 
 `MooseX-MungeHas`
+	:runtime-requirement    [ :on "perl 5.008000"^^:CpanId ];
+	:runtime-requirement    [ :on "Sub::Util 1.40"^^:CpanId ];
 	:runtime-suggestion     [ :on "Moo 1.002000"^^:CpanId ];
 	:runtime-suggestion     [ :on "Moose 2.0000"^^:CpanId ];
 	:runtime-suggestion     [ :on "Mouse 1.00"^^:CpanId ];

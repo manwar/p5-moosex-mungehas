@@ -82,6 +82,14 @@ sub _compile_munger_code
 		}
 	}
 	
+	push @code, '  if (ref($_{builder}) eq q(CODE)) {';
+	push @code, '    no strict qw(refs);';
+	push @code, '    require Sub::Util;';
+	push @code, '    my $name = "$_{__CALLER__}::_build_$_";';
+	push @code, '    *$name = Sub::Util::set_subname($name, $_{builder});';
+	push @code, '    $_{builder} = $name;';
+	push @code, '  }';
+	
 	unless (_detect_oo($caller) eq "Moo")
 	{
 		push @code, '  if ($_{is} eq q(lazy)) {';
@@ -143,7 +151,8 @@ sub _compile_munger_code
 	}
 	
 	push @code, sprintf('  $subs[%d]->(@_);', $_) for 0..$#subs;
-	
+	#push @code, '  ::diag(::explain($_, \%_));';
+	push @code, '  delete($_{__CALLER__});';
 	push @code, "}";
 	
 	croak sprintf("Did not understand mungers: %s", join(q[, ], sort keys %features))
@@ -192,7 +201,13 @@ sub _make_has
 	
 	return sub
 	{
-		my ($attr, %spec) = @_;
+		my ($attr, %spec) = (
+			(@_ == 2 and ref($_[1]) eq "CODE")
+				? ($_[0], is => "lazy", builder => $_[1])
+				: (@_ == 2 and ref($_[1]) eq "HASH") ? ($_[0], %{$_[1]}) : @_
+		);
+		
+		$spec{"__CALLER__"} = $caller;
 		
 		if (ref($attr) eq q(ARRAY))
 		{
@@ -222,7 +237,13 @@ sub _make_has_mouse
 	
 	return sub
 	{
-		my ($attr, %spec) = @_;
+		my ($attr, %spec) = (
+			(@_ == 2 and ref($_[1]) eq "CODE")
+				? ($_[0], is => "lazy", builder => $_[1])
+				: (@_ == 2 and ref($_[1]) eq "HASH") ? ($_[0], %{$_[1]}) : @_
+		);
+		
+		$spec{"__CALLER__"} = $caller;
 		
 		if (ref($attr) eq q(ARRAY))
 		{

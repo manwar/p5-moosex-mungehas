@@ -45,6 +45,7 @@ my $Even = Int->create_child_type(
 	has attr2 => (isa => $Even, coerce => 0); # this should be simplified to Int
 	has attr3 => (isa => $Even, is => "rwp");
 	has attr4 => (isa => $Even, is => "lazy", default => sub { 42 });
+	has attr5 => sub { 999 };
 }
 
 is(
@@ -72,6 +73,20 @@ is(
 ok(
 	exists $o->{attr4},
 	'$o->attr4 is now initialized',
+);
+
+ok(
+	!exists $o->{attr5},
+	'$o->attr5 is not initialized',
+);
+is(
+	$o->attr5,
+	999,
+	'default worked',
+);
+ok(
+	exists $o->{attr5},
+	'$o->attr5 is now initialized',
 );
 
 done_testing;
