@@ -100,5 +100,6 @@
 	changeset [
 		item "Allow Moo-style `builder=>$coderef` in Moose and Mouse."^^Change;
 		item "Allow Object::Simple-style `has $name=>$coderef` in Moo, Moose, and Mouse."^^Change;
+		item "Allow `has $name=>$type` in Moo, Moose, and Mouse."^^Change;
 	].
 

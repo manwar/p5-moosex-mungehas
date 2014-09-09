@@ -40,7 +40,7 @@ my $Even = Int->create_child_type(
 	package Local::Class1;
 	use Mouse;
 	use MooseX::MungeHas qw( is_ro simple_isa always_coerce );
-	has attr1 => (isa => $Even, coerce => 1);
+	has attr1 => $Even;
 	has attr2 => (isa => $Even, coerce => 0); # this should be simplified to Int
 	has attr3 => (isa => $Even, is => "rwp");
 	has attr4 => (isa => $Even, is => "lazy", default => sub { 42 });
