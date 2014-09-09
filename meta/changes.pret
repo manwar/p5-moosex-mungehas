@@ -103,3 +103,11 @@
 		item "Allow `has $name=>$type` in Moo, Moose, and Mouse."^^Change;
 	].
 
+`MooseX-MungeHas 0.007 cpan:TOBYINK`
+	issued  2014-09-09;
+	changeset [
+		item "Better detection of OO framework."^^Change;
+		item "Allow exporting of more than one `has` function."^^Change;
+		item "Bugfix for interaction of `is_rw` and `has $name=>$builder`."^^Change;
+	].
+
