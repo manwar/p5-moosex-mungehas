@@ -94,3 +94,11 @@
 		item "Various documentation improvements."^^Documentation;
 	].
 
+`MooseX-MungeHas 0.006 cpan:TOBYINK`
+	issued  2014-09-09;
+	label   "tobyink ♥ builder";
+	changeset [
+		item "Allow Moo-style `builder=>$coderef` in Moose and Mouse."^^Change;
+		item "Allow Object::Simple-style `has $name=>$coderef` in Moo, Moose, and Mouse."^^Change;
+	].
+
