@@ -111,3 +111,13 @@
 		item "Bugfix for interaction of `is_rw` and `has $name=>$builder`."^^Change;
 	].
 
+`MooseX-MungeHas 0.008 cpan:TOBYINK`
+	issued  2017-05-27;
+	changeset [
+		item [
+			a dcs:Bugfix;
+			label "Make sure that has(\@attr, %spec) works.";
+			dcs:fixes RT#121895;
+		];
+	].
+
