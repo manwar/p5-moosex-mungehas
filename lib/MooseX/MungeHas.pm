@@ -124,9 +124,10 @@ sub _compile_munger_code
 	push @code, '  if (ref($_{builder}) eq q(CODE)) {';
 	push @code, '    no strict qw(refs);';
 	push @code, '    require Sub::Util;';
-	push @code, '    my $name = "$_{__CALLER__}::_build_$_";';
+	push @code, '    my $short_name = "_build_$_";';
+	push @code, '    my $name = "$_{__CALLER__}::$short_name";';
 	push @code, '    *$name = Sub::Util::set_subname($name, $_{builder});';
-	push @code, '    $_{builder} = $name;';
+	push @code, '    $_{builder} = $short_name;';
 	push @code, '  }';
 	
 	unless (_detect_oo($caller) eq "Moo")
