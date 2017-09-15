@@ -120,6 +120,10 @@ sub _compile_munger_code
 	push @code, '    my $_is = delete($_{_is});';
 	push @code, '    $_{is} ||= $_is;';
 	push @code, '  }';
+
+	push @code, 'if ( ref $_{lazy} eq q(CODE) ) {';
+	push @code, '    $_{builder} ||= $_{lazy};';
+	push @code, '}';
 	
 	push @code, '  if (ref($_{builder}) eq q(CODE)) {';
 	push @code, '    no strict qw(refs);';
@@ -386,6 +390,13 @@ Makes C<< has $name => $type_constraint >> into a shortcut for:
 
 (Assuming that C<< $type_constraint >> is a blessed type constraint
 object a la L<Type::Tiny>, L<MooseX::Types>, etc.)
+
+=item *
+
+Makes C<< lazy => sub { ... } >> into a shortcut for:
+
+    lazy    => 1,
+    builder => sub { ... },
 
 =back
 
