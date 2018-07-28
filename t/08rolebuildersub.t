@@ -29,24 +29,24 @@ use Test::Requires 'Moo';
 use Test::More;
 
 {
-        package Local::Role1;
-        use Moo::Role;
-        use MooseX::MungeHas;
-        has attr => (is => 'lazy', builder => sub { 'from role' });
+	package Local::Role1;
+	use Moo::Role;
+	use MooseX::MungeHas;
+	has attr => (is => 'lazy', builder => sub { 'from role' });
 }
 
 {
-        package Local::Class1;
-        use Moo;
-        with 'Local::Role1';
-        sub _build_attr { 'from class' }
+	package Local::Class1;
+	use Moo;
+	with 'Local::Role1';
+	sub _build_attr { 'from class' }
 }
 
 {
-        package Local::Class2;
-        use Moo;
-        with 'Local::Role1';
-        around _build_attr => sub { 'from class' };
+	package Local::Class2;
+	use Moo;
+	with 'Local::Role1';
+	around _build_attr => sub { 'from class' };
 }
 
 is(Local::Class1->new->attr, 'from class');
