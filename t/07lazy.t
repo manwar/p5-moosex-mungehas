@@ -24,6 +24,6 @@ sub test_lazy {
 		);
 	!;
 	
-	is Foo->new->bar => 'got it', 'lazy attribute works'; 
+	is Foo->new->bar => 'got it', 'lazy attribute works';
 }
 
