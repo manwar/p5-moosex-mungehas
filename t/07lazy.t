@@ -1,29 +1,32 @@
 use Test::More tests => 3;
-
-use Test::Requires "Moo";
-
 use strict;
 use warnings;
+
+{ package XXX; use Test::Requires "Moo"; }
+{ package YYY; use Test::Requires "Moose"; }
+{ package ZZZ; use Test::Requires "Mouse"; }
 
 subtest $_, \&test_lazy, $_ for qw/ Moo Moose Mouse /;
 
 sub test_lazy {
-	my $class = shift;
+	my $framework = shift;
 	
-	plan skip_all => "$class not installed" unless eval "use $class; 1";
-	
-	eval q!
-		package Foo;
+	my $class = eval qq!
+		package Foo::$framework;
 		
-		use Moo;
+		use $framework;
 		use MooseX::MungeHas;
 		
 		has bar => (
 			is   => 'ro',
 			lazy => sub { 'got it' },
 		);
+		
+		__PACKAGE__;
 	!;
 	
-	is Foo->new->bar => 'got it', 'lazy attribute works';
+	ok $class, "class building worked for $class";
+	
+	is $class->new->bar => 'got it', 'lazy attribute works';
 }
 
