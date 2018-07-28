@@ -141,5 +141,6 @@
 			rdfs:seeAlso <https://github.com/tobyink/p5-moosex-mungehas/pull/5>;
 			dcs:blame cpan:ARC;
 		];
+		item "Make 07lazy.t actually test something useful. I can't remember why this test case even exists."^^Tests;
 	].
 
