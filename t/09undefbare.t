@@ -33,21 +33,21 @@ local $^W = 1;
 local $SIG{__WARN__} = sub { push @warnings, shift };
 
 {
-        package Local::Base;
-        use Moose;
-        use MooseX::MungeHas;
-        has attr => (is => 'ro', required => 1);
+	package Local::Base;
+	use Moose;
+	use MooseX::MungeHas;
+	has attr => (is => 'ro', required => 1);
 }
 
 {
-        package Local::Derived;
-        use Moose;
-        use MooseX::MungeHas;
-        extends 'Local::Base';
-        has '+attr' => (default => 17);
+	package Local::Derived;
+	use Moose;
+	use MooseX::MungeHas;
+	extends 'Local::Base';
+	has '+attr' => (default => 17);
 }
 
 is_deeply(\@warnings, [], 'no warnings issued')
-    or diag explain(\@warnings);
+	or diag explain(\@warnings);
 done_testing;
 
