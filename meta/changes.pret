@@ -128,6 +128,18 @@
 			a dcs:Bugfix;
 			label "Don't use fully-qualified sub names for builders.";
 			rdfs:seeAlso <https://github.com/tobyink/p5-moosex-mungehas/pull/3>;
+			dcs:blame cpan:ARC;
+		];
+	].
+
+`MooseX-MungeHas 0.010 cpan:TOBYINK`
+	issued  2018-07-28;
+	changeset [
+		item [
+			a dcs:Bugfix;
+			label "Eliminate uninitialized warning when no `is` under Moose.";
+			rdfs:seeAlso <https://github.com/tobyink/p5-moosex-mungehas/pull/5>;
+			dcs:blame cpan:ARC;
 		];
 	].
 
