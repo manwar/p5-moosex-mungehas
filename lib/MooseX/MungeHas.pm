@@ -136,13 +136,15 @@ sub _compile_munger_code
 	
 	unless (_detect_oo($caller) eq "Moo")
 	{
-		push @code, '  if ($_{is} eq q(lazy)) {';
+		push @code, '  my $is = $_{is} || "";';
+
+		push @code, '  if ($is eq q(lazy)) {';
 		push @code, '    $_{is}      = "ro";';
 		push @code, '    $_{lazy}    = 1 unless exists($_{lazy});';
 		push @code, '    $_{builder} = "_build_$_" if $_{lazy} && !exists($_{builder}) && !exists($_{default});';
 		push @code, '  }';
 		
-		push @code, '  if ($_{is} eq q(rwp)) {';
+		push @code, '  if ($is eq q(rwp)) {';
 		push @code, '    $_{is}     = "ro";';
 		push @code, '    $_{writer} = "_set_$_" unless exists($_{writer});';
 		push @code, '  }';
