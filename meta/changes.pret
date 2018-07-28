@@ -121,3 +121,13 @@
 		];
 	].
 
+`MooseX-MungeHas 0.009 cpan:TOBYINK`
+	issued  2018-07-28;
+	changeset [
+		item [
+			a dcs:Bugfix;
+			label "Don't use fully-qualified sub names for builders.";
+			rdfs:seeAlso <https://github.com/tobyink/p5-moosex-mungehas/pull/3>;
+		];
+	].
+

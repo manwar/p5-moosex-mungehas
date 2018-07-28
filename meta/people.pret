@@ -17,3 +17,6 @@ cpan:ARODLAND
 <urn:uuid:382de9f9-3ec0-4aa1-ba60-aa80709e75ac>
 	:name "Pierre Masci";
 	:page <http://www.perlmonks.org/?node_id=946673>.
+
+cpan:ARC
+	:name  "Aaron Crane".
