@@ -442,6 +442,11 @@ These mungers supply defaults for the C<< is >> option.
 Automatically provides C<< coerce => 1 >> if the type constraint provides
 coercions. (Unless you've explicitly specified C<< coerce => 0 >>.)
 
+=item C<< always_required >>
+
+Automatically provides C<< required => 1 >> unless there is a default or
+builder. (Unless you've explicitly specified C<< required => 0 >>.)
+
 =item C<< no_isa >>
 
 Switches off C<< isa >> checks for attributes, unless they coerce.
