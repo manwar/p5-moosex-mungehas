@@ -144,3 +144,9 @@
 		item "Make 07lazy.t actually test something useful. I can't remember why this test case even exists."^^Tests;
 	].
 
+`MooseX-MungeHas 0.011 cpan:TOBYINK`
+	issued  2019-01-01;
+	changeset [
+		item "Add always_required feature."^^Addition;
+	].
+

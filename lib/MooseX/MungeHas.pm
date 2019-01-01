@@ -6,7 +6,7 @@ use warnings;
 
 BEGIN {
 	$MooseX::MungeHas::AUTHORITY = 'cpan:TOBYINK';
-	$MooseX::MungeHas::VERSION   = '0.010';
+	$MooseX::MungeHas::VERSION   = '0.011';
 };
 
 use Carp qw(croak);
