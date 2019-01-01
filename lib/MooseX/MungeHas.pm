@@ -174,6 +174,13 @@ sub _compile_munger_code
 		push @code, '  }';
 	}
 	
+	if (delete $features{"always_required"})
+	{
+		push @code, '  if (!exists($_{required}) and !exists($_{default}) and !exists($_{builder})) {';
+		push @code, '    $_{required} = 1;';
+		push @code, '  }';
+	}
+
 	if (_detect_oo($caller) eq "Moo")
 	{
 		push @code, '  if (defined($_{coerce}) and !ref($_{coerce}) and $_{coerce} eq "1") {';
