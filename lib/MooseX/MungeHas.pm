@@ -327,7 +327,11 @@ __END__
 
 =begin private
 
+=over
+
 =item eval_closure
+
+=back
 
 =end private
 
